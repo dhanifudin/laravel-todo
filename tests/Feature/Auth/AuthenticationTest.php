@@ -5,6 +5,7 @@ namespace Tests\Feature\Auth;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Support\ViewErrorBag;
 
 class AuthenticationTest extends TestCase
 {
@@ -12,13 +13,16 @@ class AuthenticationTest extends TestCase
 
     public function test_login_screen_can_be_rendered(): void
     {
+        $this->withoutExceptionHandling();
         $response = $this->get('/login');
 
         $response->assertStatus(200);
+        $response->withViewErrors(new ViewErrorBag());
     }
 
     public function test_users_can_authenticate_using_the_login_screen(): void
     {
+        $this->withoutExceptionHandling();
         $user = User::factory()->create();
 
         $response = $this->withSession([])->post('/login', [
@@ -44,6 +48,7 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_logout(): void
     {
+        $this->withoutExceptionHandling();
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->withSession([])->post('/logout');

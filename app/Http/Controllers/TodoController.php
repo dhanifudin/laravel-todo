@@ -11,11 +11,22 @@ class TodoController extends Controller
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function index()
+    public function index(Request $request)
     {
-        $todos = auth()->user()->todos()->orderBy('is_done')->get();
+        $todos = auth()->user()->todos()
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = $request->input('search');
 
-        return view('todos.index', compact('todos'));
+                $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('is_done')
+            ->orderByDesc('created_at')
+            ->get();
+
+        return view('todos.index', [
+            'todos' => $todos,
+            'search' => $request->input('search'),
+        ]);
     }
 
     public function store(Request $request)
