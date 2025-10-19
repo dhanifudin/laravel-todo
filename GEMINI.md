@@ -13,3 +13,9 @@
 - Ask for any clarification rather just guessing things if you are not clear about anything.
 - Use laravel/breeze to scaffolding the project
 - Ensure the feature implementation testable using PEST
+
+## E2E Testing
+
+- Use playwright
+- Ensure the test have 100% code coverage
+- Use best practice
