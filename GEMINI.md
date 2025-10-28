@@ -1,4 +1,8 @@
-# Project: Laravel Todo + PEST
+# Project: Laravel Todo + PEST + API
+
+## Framework
+- Laravel 12
+- sanctum
 
 ## Feature
 
@@ -19,3 +23,9 @@
 - Use playwright
 - Ensure the test have 100% code coverage
 - Use best practice
+
+## API Requirement
+- Use OpenAPI standard
+- Integrate Laravel with OpenAPI
+- Use Sanctum to manage the authentication
+- Ensure using best practice

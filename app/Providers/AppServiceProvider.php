@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\View\View;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\ViewErrorBag;
-use Illuminate\Testing\TestResponse;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,14 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        TestResponse::macro('withViewErrors', function (ViewErrorBag $errors) {
-            if (! isset($this->original) || ! $this->original instanceof View) {
-                throw new \BadMethodCallException('The response is not a view.');
-            }
-
-            $this->original->with(['errors' => $errors]);
-
-            return $this;
+        ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
+            return config('app.frontend_url')."/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
         });
     }
 }
