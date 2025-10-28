@@ -39,6 +39,16 @@ jobs:
           touch database/database.sqlite
           php artisan migrate --force
 
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          
+      - name: Build Assets
+        run: |
+          npm install
+          npm run build
+
       - name: Start Laravel server
         run: |
           php artisan serve --host=127.0.0.1 --port=8000 &
@@ -51,12 +61,6 @@ jobs:
             echo "Waiting for server... ($i)"
             sleep 1
           done
-
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          # Use the latest LTS/stable Node version
-          node-version: 'lts/*'
 
       - name: Install Playwright dependencies
         working-directory: playwright
