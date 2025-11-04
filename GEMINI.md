@@ -1,4 +1,11 @@
-# Project: Laravel Todo + PEST + API
+# Project: Todo Application
+
+# Web
+- Laravel
+- Sanctum API
+
+# Mobile
+- Flutter
 
 ## Framework
 - Laravel 12
