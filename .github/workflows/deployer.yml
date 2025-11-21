@@ -19,7 +19,7 @@ jobs:
           php-version: '8.4'
 
       - name: Install dependencies
-        run: composer install
+        run: cd laravel/ && composer install
 
       - name: Deploy
         uses: deployphp/action@v1
