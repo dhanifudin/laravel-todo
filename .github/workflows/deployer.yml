@@ -26,5 +26,5 @@ jobs:
         with:
           private-key: ${{ secrets.PRIVATE_KEY }}
           sub-directory: "laravel"
-          deployer-binary: "laravel/vendor/bin/dep"
+          deployer-binary: "vendor/bin/dep"
           dep: deploy
