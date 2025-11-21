@@ -25,4 +25,5 @@ jobs:
         uses: deployphp/action@v1
         with:
           private-key: ${{ secrets.PRIVATE_KEY }}
+          deployer-binary: "laravel/vendor/bin/dep"
           dep: deploy
